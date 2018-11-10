@@ -1,0 +1,9 @@
+In order to build, ensure that you have a UnityEditorDir environment variable set up, which points to the Unity editor path. For example:
+
+  C:\Program Files\Unity\Hub\Editor\2018.2.7f1\Editor
+
+Alternatively, using the .NET CLI, you can set the variable on the command line:
+
+  dotnet build -p:UnityEditorDir="C:\Program Files\Unity\Hub\Editor\2018.2.7f1\Editor"
+
+The latter method is useful when developing plugins for games that use older versions of Unity.

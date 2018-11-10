@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net35</TargetFramework>
+        <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net35'">$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
+        <Description></Description>
+        <Copyright>Copyright ©2018 Benjamin Moir</Copyright>
+        <Authors>Benjamin Moir</Authors>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/GamePluginKit/GamePluginKit</RepositoryUrl>
+        <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="UnityEngine">
+            <HintPath>$(UnityEditorDir)\Data\Managed\UnityEngine.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="NAudio" Version="1.8.5" />
+    </ItemGroup>
+</Project>
