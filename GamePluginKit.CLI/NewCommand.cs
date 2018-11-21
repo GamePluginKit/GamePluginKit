@@ -108,18 +108,10 @@ namespace GamePluginKit.CLI
             package.SetAttribute("Version", "*");
             items.AppendChild(package);
 
-            foreach (string filePath in Directory.EnumerateFiles(managedDir, "*.dll"))
-            {
-                string referenceName = Path.GetFileNameWithoutExtension(filePath);
-                string fileName      = Path.GetFileName(filePath);
-
-                var reference = doc.CreateElement("Reference");
-                reference.SetAttribute("Include", referenceName);
-                reference.AppendChild(doc.CreateElement("HintPath")).InnerText = $"$(ManagedDir)\\{fileName}";
-                reference.AppendChild(doc.CreateElement("Private" )).InnerText = "False";
-
-                items.AppendChild(reference);
-            }
+            var reference = doc.CreateElement("Reference");
+            reference.SetAttribute("Include", "$(ManagedDir)\\*.dll");
+            reference.AppendChild(doc.CreateElement("Private" )).InnerText = "False";
+            items.AppendChild(reference);
 
             return doc;
         }
