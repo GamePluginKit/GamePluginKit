@@ -110,7 +110,7 @@ namespace GamePluginKit.CLI
 
             var reference = doc.CreateElement("Reference");
             reference.SetAttribute("Include", "$(ManagedDir)\\*.dll");
-            reference.AppendChild(doc.CreateElement("Private" )).InnerText = "False";
+            reference.SetAttribute("Private", "False");
             items.AppendChild(reference);
 
             return doc;
