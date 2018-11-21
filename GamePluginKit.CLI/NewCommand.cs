@@ -38,9 +38,6 @@ namespace GamePluginKit.CLI
         [Option(Description = "Location to place the generated output")]
         string Output { get; }
 
-        [Option(Description = "The TargetFramework to use")]
-        string Framework { get; } = null;
-
         void OnExecute(IConsole console)
         {
             string outputDir = new Uri(Path.GetFullPath(Output ?? ProjectName)).AbsolutePath.TrimEnd(
@@ -98,9 +95,11 @@ namespace GamePluginKit.CLI
             var items   = project.AppendChild(doc.CreateElement("ItemGroup"))     as XmlElement;
 
             project.SetAttribute("Sdk", "Microsoft.NET.Sdk");
-            props.AppendChild(doc.CreateElement("OutputType"     )).InnerText = "Library";
-            props.AppendChild(doc.CreateElement("ManagedDir"     )).InnerText = managedDir;
-            props.AppendChild(doc.CreateElement("TargetFramework")).InnerText = Framework ?? DetectFramework(managedDir);
+            props.AppendChild(doc.CreateElement("OutputType")).InnerText = "Library";
+            props.AppendChild(doc.CreateElement("ManagedDir")).InnerText = managedDir;
+
+            props.AppendChild(doc.CreateElement("TargetFramework"      )).InnerText = DetectFramework(managedDir);
+            props.AppendChild(doc.CreateElement("FrameworkPathOverride")).InnerText = "$(ManagedDir)";
 
             var package = doc.CreateElement("PackageReference");
             package.SetAttribute("Include", "GamePluginKit.API");
