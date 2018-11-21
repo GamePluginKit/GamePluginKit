@@ -101,6 +101,8 @@ namespace GamePluginKit.CLI
             props.AppendChild(doc.CreateElement("TargetFramework"      )).InnerText = DetectFramework(managedDir);
             props.AppendChild(doc.CreateElement("FrameworkPathOverride")).InnerText = "$(ManagedDir)";
 
+            props.AppendChild(doc.CreateElement("GenerateTargetFrameworkAttribute")).InnerText = "False";
+
             var package = doc.CreateElement("PackageReference");
             package.SetAttribute("Include", "GamePluginKit.API");
             package.SetAttribute("Version", "*");
