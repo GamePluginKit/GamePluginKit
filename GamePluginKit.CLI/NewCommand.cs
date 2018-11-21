@@ -14,10 +14,10 @@
 
 using System;
 using System.IO;
+using System.Xml;
+using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 using McMaster.Extensions.CommandLineUtils;
-using System.Reflection;
-using System.Xml;
 
 namespace GamePluginKit.CLI
 {
@@ -39,7 +39,7 @@ namespace GamePluginKit.CLI
         string Output { get; }
 
         [Option(Description = "The TargetFramework to use")]
-        string Framework { get; } = "net46";
+        string Framework { get; } = null;
 
         void OnExecute(IConsole console)
         {
@@ -70,18 +70,37 @@ namespace GamePluginKit.CLI
                 stream.CopyTo(output);
         }
 
+        string DetectFramework(string managedDir)
+        {
+            // todo: netstandard games
+
+            var target = new Version(3, 5);
+
+            foreach (string filePath in Directory.EnumerateFiles(managedDir, "*.dll"))
+            {
+                var assembly = Assembly.ReflectionOnlyLoadFrom(filePath);
+
+                if (!Version.TryParse(assembly.ImageRuntimeVersion.Substring(1), out var version))
+                    continue;
+
+                if (version > target)
+                    target = version;
+            }
+
+            return $"net{target.Major}{target.Minor}";
+        }
+
         XmlDocument GenerateCSProj(string managedDir)
         {
-            var doc        = new XmlDocument();
-            var project    = doc    .AppendChild(doc.CreateElement("Project"))       as XmlElement;
-            var properties = project.AppendChild(doc.CreateElement("PropertyGroup")) as XmlElement;
-            var items      = project.AppendChild(doc.CreateElement("ItemGroup"))     as XmlElement;
+            var doc     = new XmlDocument();
+            var project = doc    .AppendChild(doc.CreateElement("Project"))       as XmlElement;
+            var props   = project.AppendChild(doc.CreateElement("PropertyGroup")) as XmlElement;
+            var items   = project.AppendChild(doc.CreateElement("ItemGroup"))     as XmlElement;
 
             project.SetAttribute("Sdk", "Microsoft.NET.Sdk");
-            properties.AppendChild(doc.CreateElement("OutputType"     )).InnerText = "Library";
-            properties.AppendChild(doc.CreateElement("TargetFramework")).InnerText = Framework;
-            properties.AppendChild(doc.CreateElement("NoStdLib"       )).InnerText = "True";
-            properties.AppendChild(doc.CreateElement("ManagedDir"     )).InnerText = managedDir;
+            props.AppendChild(doc.CreateElement("OutputType"     )).InnerText = "Library";
+            props.AppendChild(doc.CreateElement("ManagedDir"     )).InnerText = managedDir;
+            props.AppendChild(doc.CreateElement("TargetFramework")).InnerText = Framework ?? DetectFramework(managedDir);
 
             var package = doc.CreateElement("PackageReference");
             package.SetAttribute("Include", "GamePluginKit.API");
