@@ -127,9 +127,9 @@ namespace GamePluginKit.Patcher
             // We also need to copy the plugin loader assembly into the managed directory
             File.Copy(LoaderAssemblyName, Path.Combine(managedDir, LoaderAssemblyName), true);
 
-            // And also make sure the GamePlugins directory exists, for convenience
-            if (!Directory.Exists(Path.Combine(dataDir, "GamePlugins")))
-                Directory.CreateDirectory(Path.Combine(dataDir, "GamePlugins"));
+            // And also make sure the Mods directory exists, for convenience
+            if (!Directory.Exists(Path.Combine(dataDir, "Mods")))
+                Directory.CreateDirectory(Path.Combine(dataDir, "Mods"));
 
             // We're done with these
             targetAssm.Dispose(); injectAssm.Dispose();

@@ -44,7 +44,7 @@ namespace GamePluginKit
 
             // We also need to locate the game-specific plugin directory.
             // This is located in a subfolder within the game's data directory.
-            var pluginDir = Path.Combine(Application.dataPath, "GamePlugins");
+            var pluginDir = Path.Combine(Application.dataPath, "Mods");
 
             // Set up the search paths and register the assembly resolver
             SearchPaths.UnionWith(new[] { coreDir, globalDir, pluginDir });
