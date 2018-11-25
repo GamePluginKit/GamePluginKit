@@ -58,9 +58,9 @@ namespace GamePluginKit
 
             // Load any plugins from the core assemblies, load global
             // plugins, and finally, load any game-specific plugins.
-            LoadPluginAssemblies(root, Directory.GetFiles(coreDir,   "*.dll"));
-            LoadPluginAssemblies(root, Directory.GetFiles(globalDir, "*.dll"));
-            LoadPluginAssemblies(root, Directory.GetFiles(pluginDir, "*.dll"));
+            LoadPluginAssemblies(root, Directory.GetFiles(coreDir,   "*.dll", SearchOption.AllDirectories));
+            LoadPluginAssemblies(root, Directory.GetFiles(globalDir, "*.dll", SearchOption.AllDirectories));
+            LoadPluginAssemblies(root, Directory.GetFiles(pluginDir, "*.dll", SearchOption.AllDirectories));
         }
 
         // It's important that this logic remains in a separate function,
