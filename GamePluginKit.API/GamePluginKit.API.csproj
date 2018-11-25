@@ -8,12 +8,12 @@
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/GamePluginKit/GamePluginKit</RepositoryUrl>
         <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+        <GenerateTargetFrameworkAttribute>False</GenerateTargetFrameworkAttribute>
     </PropertyGroup>
 
     <ItemGroup>
-        <Reference Include="UnityEngine">
+        <Reference Include="UnityEngine" Private="False">
             <HintPath>$(UnityEditorDir)\Data\Managed\UnityEngine.dll</HintPath>
-            <Private>False</Private>
         </Reference>
     </ItemGroup>
 

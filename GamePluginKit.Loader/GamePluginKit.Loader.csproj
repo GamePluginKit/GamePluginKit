@@ -2,12 +2,12 @@
     <PropertyGroup>
         <TargetFramework>net35</TargetFramework>
         <FrameworkPathOverride>$(UnityEditorDir)\Data\Mono\lib\mono\unity</FrameworkPathOverride>
+        <GenerateTargetFrameworkAttribute>False</GenerateTargetFrameworkAttribute>
     </PropertyGroup>
 
     <ItemGroup>
-        <Reference Include="UnityEngine">
+        <Reference Include="UnityEngine" Private="False">
             <HintPath>$(UnityEditorDir)\Data\Managed\UnityEngine.dll</HintPath>
-            <Private>False</Private>
         </Reference>
     </ItemGroup>
 
