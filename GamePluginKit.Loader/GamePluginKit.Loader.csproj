@@ -14,7 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GamePluginKit.API\GamePluginKit.API.csproj" />
       <PackageReference Include="Mono.Cecil" Version="0.10.1" />
     </ItemGroup>
 </Project>

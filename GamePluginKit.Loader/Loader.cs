@@ -92,13 +92,7 @@ namespace GamePluginKit
                         {
                             try
                             {
-                                // Ensure the attribute is a StartupBehaviourAttribute
-                                var attrTypeName = Assembly.CreateQualifiedName(
-                                    attribute.AttributeType.Resolve()?.Module.Assembly.FullName,
-                                    attribute.AttributeType.FullName
-                                );
-
-                                if (attrTypeName != typeof(StartupBehaviourAttribute).AssemblyQualifiedName)
+                                if (attribute.AttributeType.FullName != "GamePluginKit.StartupBehaviourAttribute")
                                     continue;
 
                                 // Retrieve the behaviour type
