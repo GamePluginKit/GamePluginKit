@@ -11,7 +11,8 @@
         <RepositoryUrl>https://github.com/GamePluginKit/GamePluginKit</RepositoryUrl>
         <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
         <GenerateTargetFrameworkAttribute>False</GenerateTargetFrameworkAttribute>
-        <Version>2.0.0</Version>
+        <Version>2.1.0</Version>
+        <DefineConstants>REFERENCES_UNITY</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>

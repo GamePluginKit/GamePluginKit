@@ -8,4 +8,8 @@
         <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
         <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
     </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="$(MSBuildThisFileDirectory)\GamePluginKit.Common\**\*.cs" />
+    </ItemGroup>
 </Project>

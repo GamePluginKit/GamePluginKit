@@ -35,18 +35,14 @@ namespace GamePluginKit
             if  (Initialized) return;
             else Initialized = true;
 
-            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string gpkDirectory = Path.Combine(localAppData, "GamePluginKit");
-
-            var coreDir   = Path.Combine(gpkDirectory, "Core");
-            var globalDir = Path.Combine(gpkDirectory, "Plugins");
-
-            // We also need to locate the game-specific plugin directory.
-            // This is located in a subfolder within the game's data directory.
-            var pluginDir = Path.Combine(Application.dataPath, "Mods");
-
             // Set up the search paths and register the assembly resolver
-            SearchPaths.UnionWith(new[] { coreDir, globalDir, pluginDir });
+            SearchPaths.UnionWith(new[]
+            {
+                GpkEnvironment.CorePath,
+                GpkEnvironment.PluginsPath,
+                GpkEnvironment.ModsPath
+            });
+
             AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
 
             // Initialize the root object, which each plugin's object is a child of
@@ -57,15 +53,15 @@ namespace GamePluginKit
 
             // Load any plugins from the core assemblies, load global
             // plugins, and finally, load any game-specific plugins.
-            LoadPluginAssemblies(root, Directory.GetFiles(coreDir,   "*.dll", SearchOption.AllDirectories));
-            LoadPluginAssemblies(root, Directory.GetFiles(globalDir, "*.dll", SearchOption.AllDirectories));
-            LoadPluginAssemblies(root, Directory.GetFiles(pluginDir, "*.dll", SearchOption.AllDirectories));
+            LoadPluginAssemblies(root, GpkEnvironment.CorePath,    SearchOption.AllDirectories);
+            LoadPluginAssemblies(root, GpkEnvironment.PluginsPath, SearchOption.AllDirectories);
+            LoadPluginAssemblies(root, GpkEnvironment.ModsPath,    SearchOption.AllDirectories);
         }
 
         // It's important that this logic remains in a separate function,
         // otherwise the Mono.Cecil and GamePluginKit.API assemblies
         // will be resolved before the custom resolver is registered.
-        static void LoadPluginAssemblies(Transform root, ICollection<string> filePaths)
+        static void LoadPluginAssemblies(Transform root, string directory, SearchOption searchOption)
         {
             using (var resolver = new DefaultAssemblyResolver())
             {
@@ -77,7 +73,7 @@ namespace GamePluginKit
                     AssemblyResolver = resolver
                 };
 
-                foreach (string filePath in filePaths)
+                foreach (string filePath in Directory.GetFiles(directory, "*.dll", searchOption))
                 {
                     // Mono.Cecil is used to inspect the attributes for a very important reason.
                     // If a plugin assembly contains attributes that are not present in the game's
