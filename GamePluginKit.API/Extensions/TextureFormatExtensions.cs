@@ -14,7 +14,7 @@
 
 using UnityEngine;
 
-namespace GamePluginKit.API.Extensions
+namespace GamePluginKit.Extensions
 {
     public static class TextureFormatExtensions
     {

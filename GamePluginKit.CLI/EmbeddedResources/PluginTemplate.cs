@@ -1,5 +1,5 @@
 using UnityEngine;
-using GamePluginKit.API;
+using GamePluginKit;
 
 [assembly: StartupBehaviour(typeof(Plugin))]
 

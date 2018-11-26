@@ -21,7 +21,6 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 using Mono.Cecil;
-using GamePluginKit.API;
 
 namespace GamePluginKit
 {

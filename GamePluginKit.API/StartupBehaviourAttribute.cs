@@ -14,7 +14,7 @@
 
 using System;
 
-namespace GamePluginKit.API
+namespace GamePluginKit
 {
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public sealed class StartupBehaviourAttribute : Attribute
