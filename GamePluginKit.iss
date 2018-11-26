@@ -17,15 +17,15 @@ Name: "csp"; Description: "C# Source Plugin Support"; Types: full
 
 [Files]
 ; Game Plugin Kit
-Source: "Core\GamePluginKit.API.dll"; DestDir: "{app}\Core"; Components: app
-Source: "Tools\Patcher\*"; DestDir: "{app}\Tools\Patcher"; Components: app; Flags: recursesubdirs
+Source: "Core\GamePluginKit.API.dll"; DestDir: "{app}\Core"; Components: app; Flags: ignoreversion
+Source: "Tools\Patcher\*"; DestDir: "{app}\Tools\Patcher"; Components: app; Flags: recursesubdirs ignoreversion
 
 ; Developer CLI
-Source: "Tools\CLI\*"; DestDir: "{app}\Tools\CLI"; Components: cli; Flags: recursesubdirs
+Source: "Tools\CLI\*"; DestDir: "{app}\Tools\CLI"; Components: cli; Flags: recursesubdirs ignoreversion
 
 ; C# Source Plugin Support
-Source: "Core\ScriptPluginLoader.dll"; DestDir: "{app}\Core"; Components: csp
-Source: "Tools\Compiler\*"; DestDir: "{app}\Tools\Compiler"; Components: csp; Flags: recursesubdirs
+Source: "Core\ScriptPluginLoader.dll"; DestDir: "{app}\Core"; Components: csp; Flags: ignoreversion
+Source: "Tools\Compiler\*"; DestDir: "{app}\Tools\Compiler"; Components: csp; Flags: recursesubdirs ignoreversion
 
 [Dirs]
 Name: "{app}\Plugins"; Flags: uninsneveruninstall
