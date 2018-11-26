@@ -1,0 +1,11 @@
+<Project>
+    <PropertyGroup>
+        <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
+        <Configuration Condition="$(Configuration) == ''">Debug</Configuration>
+        <OutputPath>$(SolutionDir)\Build\bin\$(Configuration)\</OutputPath>
+        <IntermediateOutputPath>$(SolutionDir)\Build\obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
+        <UseCommonOutputDirectory>False</UseCommonOutputDirectory>
+        <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+        <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+</Project>

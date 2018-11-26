@@ -1,4 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\Common.props" />
+
     <PropertyGroup>
         <TargetFramework>net35</TargetFramework>
         <FrameworkPathOverride>$(UnityEditorDir)\Data\Mono\lib\mono\unity</FrameworkPathOverride>
