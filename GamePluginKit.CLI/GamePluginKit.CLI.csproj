@@ -6,6 +6,7 @@
     <TargetFramework>net471</TargetFramework>
     <AssemblyName>gpkcli</AssemblyName>
     <DefaultItemExcludes>$(DefaultItemExcludes);EmbeddedResources\**</DefaultItemExcludes>
+    <OutputPath>$(OutputPath)Tools\CLI\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

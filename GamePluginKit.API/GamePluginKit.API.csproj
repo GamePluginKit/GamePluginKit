@@ -13,6 +13,7 @@
         <GenerateTargetFrameworkAttribute>False</GenerateTargetFrameworkAttribute>
         <Version>2.1.0</Version>
         <DefineConstants>REFERENCES_UNITY</DefineConstants>
+        <OutputPath>$(OutputPath)Core\</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>

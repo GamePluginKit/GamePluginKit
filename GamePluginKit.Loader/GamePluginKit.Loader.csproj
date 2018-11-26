@@ -6,6 +6,7 @@
         <FrameworkPathOverride>$(UnityEditorDir)\Data\Mono\lib\mono\unity</FrameworkPathOverride>
         <GenerateTargetFrameworkAttribute>False</GenerateTargetFrameworkAttribute>
         <DefineConstants>REFERENCES_UNITY</DefineConstants>
+        <OutputPath>$(OutputPath)Tools\Patcher\</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
