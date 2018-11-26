@@ -67,10 +67,10 @@ namespace GamePluginKit.CLI
                 stream.CopyTo(output);
         }
 
+        // todo: find out if anything needs to be done regarding netstandard.dll here
         string DetectFramework(string managedDir)
         {
-            // todo: netstandard games
-
+            // target .NET 3.5 at minimum
             var target = new Version(3, 5);
 
             foreach (string filePath in Directory.EnumerateFiles(managedDir, "*.dll"))
@@ -101,8 +101,13 @@ namespace GamePluginKit.CLI
             props.AppendChild(doc.CreateElement("TargetFramework"      )).InnerText = DetectFramework(managedDir);
             props.AppendChild(doc.CreateElement("FrameworkPathOverride")).InnerText = "$(ManagedDir)";
 
+            // This attribute often doesn't exist in Unity games, and thus causes nothing but trouble
             props.AppendChild(doc.CreateElement("GenerateTargetFrameworkAttribute")).InnerText = "False";
 
+            // This should probably not set the version to just "*", but I haven't decided on a
+            // mechanism for choosing what version to put there just yet. Could either retrieve
+            // AssemblyInformationalVersionAttribute or use the NuGet API to locate the latest.
+            // Alternatively, the dotnet CLI could be invoked with the "add package" command.
             var package = doc.CreateElement("PackageReference");
             package.SetAttribute("Include", "GamePluginKit.API");
             package.SetAttribute("Version", "*");
