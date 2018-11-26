@@ -137,8 +137,7 @@ namespace GamePluginKit
                 var assembly = Assembly.ReflectionOnlyLoadFrom(assemblyPath);
                 var name     = new AssemblyName(assembly.FullName);
 
-                if (name.Version == assemblyName.Version)
-                    return Assembly.LoadFrom(assemblyPath);
+                return Assembly.LoadFrom(assemblyPath);
             }
 
             return null;
