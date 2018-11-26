@@ -2,7 +2,7 @@
     <Import Project="..\Common.props" />
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
         <TargetFramework>net471</TargetFramework>
         <OutputPath>$(OutputPath)Tools\Patcher\</OutputPath>
     </PropertyGroup>

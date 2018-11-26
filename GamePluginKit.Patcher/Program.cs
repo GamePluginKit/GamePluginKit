@@ -15,6 +15,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
@@ -74,8 +75,12 @@ namespace GamePluginKit.Patcher
 
                 try
                 {
-                    PatchGame(folderBrowser.SelectedPath);
-                    MessageBox.Show("Game patched successfully.", "Success");
+                    string dataDir = folderBrowser.SelectedPath;
+                    string modsDir = Path.Combine(dataDir, "Mods");
+
+                    PatchGame(dataDir);
+                    MessageBox.Show("Game patched successfully. The mods folder will now be opened.", "Success");
+                    Process.Start(modsDir);
                 }
                 catch (Exception ex)
                 {
@@ -88,6 +93,7 @@ namespace GamePluginKit.Patcher
         static void PatchGame(string dataDir)
         {
             string managedDir = Path.Combine(dataDir, "Managed");
+            string modsDir    = Path.Combine(dataDir, "Mods");
 
             // First we'll need to determine which assembly to patch. Newer versions
             // of Unity use UnityEngine.CoreModule, while older versions use UnityEngine.
@@ -128,8 +134,7 @@ namespace GamePluginKit.Patcher
             File.Copy(LoaderAssemblyName, Path.Combine(managedDir, LoaderAssemblyName), true);
 
             // And also make sure the Mods directory exists, for convenience
-            if (!Directory.Exists(Path.Combine(dataDir, "Mods")))
-                Directory.CreateDirectory(Path.Combine(dataDir, "Mods"));
+            if (!Directory.Exists(modsDir)) Directory.CreateDirectory(modsDir);
 
             // We're done with these
             targetAssm.Dispose(); injectAssm.Dispose();
